@@ -1,32 +1,39 @@
-# Prerequisites
-*.d
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+# Virtual environment
+.env/
+.venv/
+env/
+venv/
+pyvenv.cfg
 
-# Precompiled Headers
-*.gch
-*.pch
+# Python/Jupyter related
+.ipynb_checkpoints/
+*.ipynb
 
-# Compiled Dynamic libraries
+# Julia
+juliaSim/.julia/
+juliaSim/.cache/
+juliaSim/Manifest.toml
+
+# Compiled binary files
 *.so
 *.dylib
 *.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
 *.out
-*.app
+*.exe
+*.o
+
+# OS / Editor specific
+.DS_Store
+Thumbs.db
+.vscode/
+*.swp
+
+# Logs and test outputs
+*.log
+*.tmp
+*.bak
