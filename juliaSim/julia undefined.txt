@@ -1,0 +1,47 @@
+julia> 1/Inf
+0.0
+
+julia> 1/0
+Inf
+
+julia> -5/0
+-Inf
+
+julia> 0.000001/0
+Inf
+
+julia> 0/0
+NaN
+
+julia> 500 + Inf
+Inf
+
+julia> 500 - Inf
+-Inf
+
+julia> Inf + Inf
+Inf
+
+julia> Inf - Inf
+NaN
+
+julia> Inf * Inf
+Inf
+
+julia> Inf / Inf
+NaN
+
+julia> 0 * Inf
+NaN
+
+julia> NaN == NaN
+false
+
+julia> NaN != NaN
+true
+
+julia> NaN < NaN
+false
+
+julia> NaN > NaN
+false
