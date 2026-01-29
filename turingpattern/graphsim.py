@@ -2,27 +2,24 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 
-# Wave parameters
-length = 10             # domain length
-points = 1000            # number of spatial points
+length = 10
+points = 1000
 x = np.linspace(0, length, points)
-k = 2 * np.pi / length  # wave number
-omega = 2 * np.pi       # angular frequency
-speed = 4.0             # wave speed
-t = 0                   # initial time
-dt = 0.05               # time step
+k = 2 * np.pi / length
+omega = 2 * np.pi
+speed = 4.0
+t = 0
+dt = 0.05
 
-# Initialize figure
 fig, ax = plt.subplots()
 line, = ax.plot(x, np.sin(k * x))
 ax.set_ylim(-1.5, 1.5)
 ax.set_title("Traveling Sine Wave")
 
-# Update function
 def update(frame):
     global t
     t += dt
-    y = np.sin(k * (x - speed * t))  # rightward traveling wave
+    y = np.sin(k * (x - speed * t))
     line.set_ydata(y)
     return [line]
 

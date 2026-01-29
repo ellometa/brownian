@@ -1,32 +1,26 @@
 import pygame
 import numpy as np
 
-# Simulation parameters
-width, height = 300, 300          # simulation grid size
-damping = 0.99                    # wave damping
-c = 4.0                           # wave speed
-dx = 2.0                          # spatial resolution
-dt = 0.2                          # time step
+width, height = 300, 300
+damping = 0.99
+c = 4.0
+dx = 2.0
+dt = 0.2
 
-# Display parameters
-window_scale = 3                 # zoom factor
+window_scale = 3
 window_size = (width * window_scale, height * window_scale)
 
-# Initialize fields
 u = np.zeros((height, width), dtype=np.float32)
 u_prev = np.zeros_like(u)
 u_next = np.zeros_like(u)
 
-# Initial pulse in the center
 u[height // 2, width // 2] = 1.0
 
-# Initialize pygame
 pygame.init()
 screen = pygame.display.set_mode(window_size)
 pygame.display.set_caption("2D Wave Simulation")
 clock = pygame.time.Clock()
 
-# Simulation step function
 def step(u, u_prev):
     laplacian = (
         -4 * u +
@@ -40,14 +34,12 @@ def step(u, u_prev):
     u_next *= damping
     return u_next
 
-# Main loop
 running = True
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
 
-    # Inject pulse with mouse
     if pygame.mouse.get_pressed()[0]:
         mx, my = pygame.mouse.get_pos()
         x, y = mx // window_scale, my // window_scale
