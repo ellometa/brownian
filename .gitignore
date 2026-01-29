@@ -37,3 +37,7 @@ Thumbs.db
 *.log
 *.tmp
 *.bak
+
+# Media files
+*.mp4
+*.gif
