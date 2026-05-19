@@ -21,5 +21,13 @@ export const CONFIG = {
   BET_AMOUNT: 10,
 
   SPAWN_Y: 30,
-  SPAWN_RANDOM_OFFSET: 20,
+  SPAWN_JITTER_PX: 2,
+  DROP_COOLDOWN_MS: 120,
+
+  // Tuned for binomial-ish empirical distribution. See phase-7 notes.
+  BALL_RESTITUTION: 0.25,
+  BALL_FRICTION: 0.4,
+  BALL_FRICTION_AIR: 0.02,
+  BALL_DENSITY: 0.005,
+  BALL_SPAWN_ANGULAR_JITTER: 0.03,
 };

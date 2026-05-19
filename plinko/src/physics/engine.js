@@ -1,8 +1,11 @@
 import { CONFIG } from "../config.js";
 
-const { Engine, Render, Runner, World, Bodies } = Matter;
+const { Engine, Render, Runner, World } = Matter;
 
-export const engine = Engine.create();
+export const engine = Engine.create({
+  positionIterations: 10,
+  velocityIterations: 8,
+});
 engine.world.gravity.y = CONFIG.GRAVITY_Y;
 
 const canvas = document.getElementById("gameCanvas");
@@ -27,32 +30,17 @@ export const render = Render.create({
 
 export { canvas as gameCanvas, slotCanvas };
 
-const wallThickness = 50;
-const walls = [
-  Bodies.rectangle(
-    -wallThickness / 2,
-    CONFIG.CANVAS_HEIGHT / 2,
-    wallThickness,
-    CONFIG.CANVAS_HEIGHT,
-    { isStatic: true, render: { fillStyle: "#333" } }
-  ),
-  Bodies.rectangle(
-    CONFIG.CANVAS_WIDTH + wallThickness / 2,
-    CONFIG.CANVAS_HEIGHT / 2,
-    wallThickness,
-    CONFIG.CANVAS_HEIGHT,
-    { isStatic: true, render: { fillStyle: "#333" } }
-  ),
-  Bodies.rectangle(
-    CONFIG.CANVAS_WIDTH / 2,
-    CONFIG.CANVAS_HEIGHT + wallThickness / 2,
-    CONFIG.CANVAS_WIDTH,
-    wallThickness,
-    { isStatic: true, render: { fillStyle: "transparent", opacity: 0 } }
-  ),
-];
-
-World.add(engine.world, walls);
+// No reflective side walls — anything that drifts past the play area is
+// removed by the out-of-bounds sweeper in ball.js. Keep only a hidden
+// floor catch so balls don't fall forever through gaps between slots.
+const floor = Matter.Bodies.rectangle(
+  CONFIG.CANVAS_WIDTH / 2,
+  CONFIG.CANVAS_HEIGHT + 25,
+  CONFIG.CANVAS_WIDTH * 2,
+  50,
+  { isStatic: true, render: { visible: false }, label: "floor" }
+);
+World.add(engine.world, floor);
 
 const runner = Runner.create();
 
