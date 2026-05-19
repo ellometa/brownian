@@ -135,3 +135,106 @@ button:disabled {
   font-size: 0.9em;
   margin-top: 10px;
 }
+
+.settings-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.settings-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.field,
+.field-inline {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.9em;
+}
+
+.field input[type="number"] {
+  width: 90px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  font-size: 0.95em;
+}
+
+.field input[type="range"] {
+  width: 140px;
+}
+
+.field-inline input[type="number"] {
+  width: 70px;
+  padding: 4px 6px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
+}
+
+.bet-quick,
+.risk-group {
+  display: flex;
+  gap: 6px;
+}
+
+.bet-quick button,
+.risk-btn {
+  padding: 6px 12px;
+  font-size: 0.9em;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: none;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.bet-quick button:hover:not(:disabled),
+.risk-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.18);
+  transform: none;
+  box-shadow: none;
+}
+
+.risk-btn.active,
+.risk-btn.active:hover:not(:disabled) {
+  background: linear-gradient(135deg, #ffd700 0%, #ff9500 100%);
+  color: #1a1a2e;
+  border-color: #ffd700;
+}
+
+.auto-row {
+  border-top: 1px dashed rgba(255, 255, 255, 0.1);
+  padding-top: 10px;
+}
+
+#autoToggleBtn {
+  background: linear-gradient(135deg, #4ecdc4 0%, #2a9d8f 100%);
+}
+
+#autoToggleBtn.auto-active {
+  background: linear-gradient(135deg, #ff6b6b 0%, #c44569 100%);
+}
+
+.reset-btn {
+  background: linear-gradient(135deg, #495057 0%, #212529 100%);
+}
+
+#rowsValue {
+  display: inline-block;
+  min-width: 20px;
+  font-weight: bold;
+  color: #ffd700;
+  text-align: center;
+}

@@ -1,5 +1,6 @@
-import { CONFIG } from "../config.js";
-import { state, bus } from "../state.js";
+import { state, bus, setMoney } from "../state.js";
+import { board } from "../board.js";
+import { save, debounce } from "../storage.js";
 
 const moneyDisplay = document.getElementById("moneyDisplay");
 const dropBallBtn = document.getElementById("dropBallBtn");
@@ -14,11 +15,16 @@ export function updateMoneyDisplay() {
 }
 
 export function updateButtons() {
-  dropBallBtn.disabled = state.money < CONFIG.BET_AMOUNT;
-  drop10BallsBtn.disabled = state.money < CONFIG.BET_AMOUNT * 10;
+  dropBallBtn.disabled = state.money < board.bet;
+  drop10BallsBtn.disabled = state.money < board.bet * 10;
 }
+
+const saveBankroll = debounce((v) => save("bankroll", v), 250);
 
 bus.on("money:changed", () => {
   updateMoneyDisplay();
   updateButtons();
+  saveBankroll(state.money);
 });
+
+bus.on("config:changed", updateButtons);

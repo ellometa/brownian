@@ -1,5 +1,6 @@
 import { dropBalls } from "../physics/ball.js";
 import { addMoney } from "../state.js";
+import { clearAll } from "../storage.js";
 
 export function installControls() {
   document.getElementById("dropBallBtn").addEventListener("click", () => {
@@ -12,5 +13,11 @@ export function installControls() {
 
   document.getElementById("increaseMoneyBtn").addEventListener("click", () => {
     addMoney(1000);
+  });
+
+  document.getElementById("resetBtn").addEventListener("click", () => {
+    if (!confirm("Reset bankroll, bet, rows, risk to defaults?")) return;
+    clearAll();
+    location.reload();
   });
 }

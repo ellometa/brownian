@@ -9,18 +9,56 @@
   </head>
   <body>
     <div class="container">
-      <h1>🎰 Plinko Simulator</h1>
+      <h1>Plinko Simulator</h1>
 
       <div class="ui-panel">
         <div class="money-display" id="moneyDisplay">$1,000.00</div>
 
+        <div class="settings-grid">
+          <div class="settings-row">
+            <label class="field">
+              Bet
+              <input id="betInput" type="number" min="0.10" step="0.10" value="10" />
+            </label>
+            <div class="bet-quick">
+              <button data-bet-mod="half">½</button>
+              <button data-bet-mod="double">2×</button>
+              <button data-bet-mod="min">Min</button>
+              <button data-bet-mod="max">Max</button>
+            </div>
+          </div>
+
+          <div class="settings-row">
+            <label class="field">
+              Rows <span id="rowsValue">12</span>
+              <input id="rowsSlider" type="range" min="8" max="16" step="1" value="12" />
+            </label>
+            <div class="risk-group">
+              <button class="risk-btn" data-risk="low">Low</button>
+              <button class="risk-btn active" data-risk="medium">Medium</button>
+              <button class="risk-btn" data-risk="high">High</button>
+            </div>
+          </div>
+
+          <div class="settings-row auto-row">
+            <button id="autoToggleBtn">Start Auto</button>
+            <label class="field-inline">
+              Count
+              <input id="autoCount" type="number" min="1" max="500" value="50" />
+            </label>
+            <label class="field-inline">
+              Interval (ms)
+              <input id="autoInterval" type="number" min="50" max="500" value="100" />
+            </label>
+          </div>
+        </div>
+
         <div class="button-group">
           <button id="dropBallBtn">Drop Ball</button>
           <button id="drop10BallsBtn">Drop 10 Balls</button>
-          <button id="increaseMoneyBtn">Increase Money (+$1,000)</button>
+          <button id="increaseMoneyBtn">+$1,000</button>
+          <button id="resetBtn" class="reset-btn">Reset</button>
         </div>
-
-        <div class="bet-info">Bet Amount: $10.00 per ball</div>
       </div>
 
       <div class="canvas-container">
