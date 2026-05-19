@@ -90,13 +90,20 @@ button:disabled {
   padding: 10px;
   border: 2px solid rgba(255, 255, 255, 0.1);
   position: relative;
+  width: 820px;
+  height: 620px;
 }
 
 #gameCanvas {
   border-radius: 4px;
   display: block;
+  position: relative;
+  z-index: 2;
 }
 
+#heatmapCanvas,
+#trailCanvas,
+#replayCanvas,
 #slotCanvas {
   border-radius: 4px;
   display: block;
@@ -104,6 +111,23 @@ button:disabled {
   top: 10px;
   left: 10px;
   pointer-events: none;
+}
+
+#heatmapCanvas {
+  z-index: 1;
+}
+
+#trailCanvas {
+  z-index: 3;
+  display: none;
+}
+
+#replayCanvas {
+  z-index: 4;
+}
+
+#slotCanvas {
+  z-index: 5;
 }
 
 .slot-flash {
@@ -464,4 +488,64 @@ button:disabled {
 
 .stress-note.active {
   display: block;
+}
+
+.viz-toggles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.toggle-btn {
+  padding: 8px 14px;
+  font-size: 0.85em;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: none;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.toggle-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.18);
+  transform: none;
+  box-shadow: none;
+}
+
+.toggle-btn.toggle-on,
+.toggle-btn.toggle-on:hover:not(:disabled) {
+  background: linear-gradient(135deg, #4ecdc4 0%, #2a9d8f 100%);
+  color: #1a1a2e;
+  border-color: #4ecdc4;
+}
+
+.toggle-btn.small {
+  font-size: 0.78em;
+  padding: 6px 10px;
+}
+
+.replay-badge {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  z-index: 6;
+  background: rgba(255, 215, 0, 0.85);
+  color: #1a1a2e;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 0.75em;
+  letter-spacing: 0.1em;
+  display: none;
+}
+
+.replay-badge.active {
+  display: block;
+  animation: pulse 0.8s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
 }

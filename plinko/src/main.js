@@ -14,6 +14,9 @@ import { installSciencePanel } from "./ui/sciencePanel.js";
 import { installStats } from "./stats.js";
 import { installDistribution } from "./science/distribution.js";
 import { installChartBindings } from "./science/chart.js";
+import { installTrails } from "./viz/trails.js";
+import { installHeatmap } from "./viz/heatmap.js";
+import { installReplay } from "./viz/replay.js";
 import { updateMoneyDisplay, updateButtons } from "./ui/money.js";
 import { bus, setMoney } from "./state.js";
 import { load } from "./storage.js";
@@ -36,6 +39,9 @@ function init() {
   installDistribution();
   installChartBindings();
   installSciencePanel();
+  installTrails();
+  installHeatmap();
+  installReplay();
   installModeToggle();
   startSlotsOverlay();
 

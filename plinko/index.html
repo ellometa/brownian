@@ -66,12 +66,23 @@
           <button id="increaseMoneyBtn">+$1,000</button>
           <button id="resetBtn" class="reset-btn">Reset</button>
         </div>
+
+        <div class="viz-toggles">
+          <button id="toggleTrailsBtn" class="toggle-btn">Trails</button>
+          <button id="toggleHeatmapBtn" class="toggle-btn">Heatmap</button>
+          <button id="clearHeatmapBtn" class="toggle-btn small">Clear heatmap</button>
+          <button id="replayBtn" class="toggle-btn small" disabled>Replay last ball</button>
+        </div>
       </div>
 
       <div class="game-area">
         <div class="canvas-container">
+          <canvas id="heatmapCanvas"></canvas>
           <canvas id="gameCanvas"></canvas>
+          <canvas id="trailCanvas"></canvas>
+          <canvas id="replayCanvas"></canvas>
           <canvas id="slotCanvas"></canvas>
+          <div id="replayBadge" class="replay-badge">REPLAY</div>
         </div>
         <aside class="sidebar" id="casinoSidebar">
           <div class="stats-card" id="statsCard"></div>
@@ -105,6 +116,6 @@
       </div>
     </div>
 
-    <script type="module" src="src/main.js?v=4"></script>
+    <script type="module" src="src/main.js?v=5"></script>
   </body>
 </html>
