@@ -7,6 +7,9 @@ import { installControls } from "./ui/controls.js";
 import { installBetControls } from "./ui/betControls.js";
 import { installBoardControls } from "./ui/boardControls.js";
 import { installAutoBet } from "./ui/autoBet.js";
+import { installStatsPanel } from "./ui/statsPanel.js";
+import { installDropsFeed } from "./ui/dropsFeed.js";
+import { installStats } from "./stats.js";
 import { updateMoneyDisplay, updateButtons } from "./ui/money.js";
 import { bus, setMoney } from "./state.js";
 import { load } from "./storage.js";
@@ -19,10 +22,13 @@ function init() {
   createPegGrid();
   createSlots();
   installCollisionHandler();
+  installStats();
   installControls();
   installBetControls();
   installBoardControls();
   installAutoBet();
+  installStatsPanel();
+  installDropsFeed();
   startSlotsOverlay();
 
   updateMoneyDisplay();
@@ -31,6 +37,10 @@ function init() {
   startEngine();
 
   window.plinkoBus = bus;
+  // Expose for ad-hoc DevTools inspection.
+  import("./physics/engine.js").then((m) => {
+    window.plinkoEngine = m.engine;
+  });
 }
 
 window.addEventListener("load", init);

@@ -238,3 +238,131 @@ button:disabled {
   color: #ffd700;
   text-align: center;
 }
+
+.game-area {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.sidebar {
+  width: 240px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.stats-card,
+.drops-feed {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.stats-card h3,
+.drops-feed h3 {
+  margin: 0 0 10px 0;
+  font-size: 0.95em;
+  color: #ffd700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.stat-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85em;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.stat-row.sep {
+  padding-top: 8px;
+  margin-top: 4px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.15);
+}
+
+.mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  color: #fff;
+}
+
+.stat-pos {
+  color: #4ecdc4 !important;
+}
+
+.stat-neg {
+  color: #ff6b6b !important;
+}
+
+.reset-stats-btn {
+  margin-top: 12px;
+  width: 100%;
+  padding: 6px 8px;
+  font-size: 0.8em;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: none;
+}
+
+.drops-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 260px;
+  overflow-y: auto;
+}
+
+.drops-list li {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 8px;
+  border-radius: 4px;
+  font-size: 0.85em;
+  animation: slide-in 0.2s ease-out;
+}
+
+.drops-list li.empty {
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.4);
+  font-style: italic;
+}
+
+.tier-jackpot {
+  background: rgba(255, 215, 0, 0.18);
+  border-left: 3px solid #ffd700;
+}
+
+.tier-win {
+  background: rgba(78, 205, 196, 0.12);
+  border-left: 3px solid #4ecdc4;
+}
+
+.tier-loss {
+  background: rgba(255, 107, 107, 0.1);
+  border-left: 3px solid #ff6b6b;
+}
+
+.drops-list .mult {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateY(-6px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
