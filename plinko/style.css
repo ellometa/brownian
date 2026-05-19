@@ -550,6 +550,38 @@ button:disabled {
   50% { opacity: 0.5; }
 }
 
+.determinism-group {
+  display: flex;
+  gap: 6px;
+}
+
+.determinism-btn {
+  padding: 6px 12px;
+  font-size: 0.85em;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: none;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.determinism-btn.active,
+.determinism-btn.active:hover:not(:disabled) {
+  background: linear-gradient(135deg, #4ecdc4 0%, #2a9d8f 100%);
+  border-color: #4ecdc4;
+  color: #07091a;
+}
+
+.determinism-banner {
+  flex-basis: 100%;
+  font-size: 0.8em;
+  color: #ffd700;
+  padding: 6px 8px;
+  background: rgba(255, 215, 0, 0.08);
+  border-left: 3px solid #ffd700;
+  border-radius: 4px;
+  margin-top: 6px;
+}
+
 .audio-row {
   display: flex;
   flex-wrap: wrap;

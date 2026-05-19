@@ -19,6 +19,7 @@ import { installHeatmap } from "./viz/heatmap.js";
 import { installReplay } from "./viz/replay.js";
 import { installAudio } from "./audio.js";
 import { installKeyboard } from "./ui/keyboard.js";
+import { installDeterminismToggle } from "./ui/determinismToggle.js";
 import { updateMoneyDisplay, updateButtons } from "./ui/money.js";
 import { bus, setMoney } from "./state.js";
 import { load } from "./storage.js";
@@ -46,6 +47,7 @@ function init() {
   installReplay();
   installAudio();
   installKeyboard();
+  installDeterminismToggle();
   installModeToggle();
   startSlotsOverlay();
 

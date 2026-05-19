@@ -37,7 +37,7 @@ export function installAutoBet() {
   function start() {
     if (running) return;
     const total = Math.max(1, Math.min(500, parseInt(countInput.value, 10) || 1));
-    const interval = Math.max(50, Math.min(500, parseInt(intervalInput.value, 10) || 100));
+    const interval = Math.max(120, Math.min(500, parseInt(intervalInput.value, 10) || 120));
     if (state.money < board.bet) return;
 
     running = true;

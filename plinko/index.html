@@ -47,6 +47,17 @@
             </div>
           </div>
 
+          <div class="settings-row">
+            <label class="field">Engine</label>
+            <div class="determinism-group">
+              <button class="determinism-btn active" data-det="off">Physics</button>
+              <button class="determinism-btn" data-det="on">Deterministic</button>
+            </div>
+            <div id="determinismBanner" class="determinism-banner hidden">
+              Path determined by seed — verifiably binomial.
+            </div>
+          </div>
+
           <div class="settings-row auto-row">
             <button id="autoToggleBtn">Start Auto</button>
             <label class="field-inline">
@@ -55,7 +66,7 @@
             </label>
             <label class="field-inline">
               Interval (ms)
-              <input id="autoInterval" type="number" min="50" max="500" value="100" />
+              <input id="autoInterval" type="number" min="120" max="500" value="150" />
             </label>
           </div>
         </div>
@@ -140,6 +151,6 @@
       <button onclick="document.getElementById('shortcutsHelp').classList.add('hidden')">Close</button>
     </div>
 
-    <script type="module" src="src/main.js?v=6"></script>
+    <script type="module" src="src/main.js?v=7"></script>
   </body>
 </html>
