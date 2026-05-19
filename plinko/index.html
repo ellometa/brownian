@@ -4,31 +4,160 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Plinko Simulator</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css?v=9" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   </head>
   <body>
     <div class="container">
-      <h1>🎰 Plinko Simulator</h1>
+      <div class="title-row">
+        <h1>Plinko Simulator</h1>
+        <div class="mode-switch">
+          <button class="mode-btn active" data-mode="casino">Casino</button>
+          <button class="mode-btn" data-mode="science">Science</button>
+        </div>
+      </div>
 
       <div class="ui-panel">
         <div class="money-display" id="moneyDisplay">$1,000.00</div>
 
+        <div class="settings-grid">
+          <div class="settings-row">
+            <label class="field">
+              Bet
+              <input id="betInput" type="number" min="0.10" step="0.10" value="10" />
+            </label>
+            <div class="bet-quick">
+              <button data-bet-mod="half">½</button>
+              <button data-bet-mod="double">2×</button>
+              <button data-bet-mod="min">Min</button>
+              <button data-bet-mod="max">Max</button>
+            </div>
+          </div>
+
+          <div class="settings-row">
+            <label class="field">
+              Rows <span id="rowsValue">12</span>
+              <input id="rowsSlider" type="range" min="8" max="16" step="1" value="12" />
+            </label>
+            <div class="risk-group">
+              <button class="risk-btn" data-risk="low">Low</button>
+              <button class="risk-btn active" data-risk="medium">Medium</button>
+              <button class="risk-btn" data-risk="high">High</button>
+            </div>
+          </div>
+
+          <div class="settings-row">
+            <label class="field">Engine</label>
+            <div class="determinism-group">
+              <button class="determinism-btn active" data-det="off">Physics</button>
+              <button class="determinism-btn" data-det="on">Deterministic</button>
+            </div>
+            <div id="determinismBanner" class="determinism-banner hidden">
+              Path determined by seed — verifiably binomial.
+            </div>
+          </div>
+
+          <div class="settings-row auto-row">
+            <button id="autoToggleBtn">Start Auto</button>
+            <label class="field-inline">
+              Count
+              <input id="autoCount" type="number" min="1" max="500" value="50" />
+            </label>
+            <label class="field-inline">
+              Interval (ms)
+              <input id="autoInterval" type="number" min="120" max="500" value="150" />
+            </label>
+          </div>
+        </div>
+
         <div class="button-group">
           <button id="dropBallBtn">Drop Ball</button>
           <button id="drop10BallsBtn">Drop 10 Balls</button>
-          <button id="increaseMoneyBtn">Increase Money (+$1,000)</button>
+          <button id="increaseMoneyBtn">+$1,000</button>
+          <button id="resetBtn" class="reset-btn">Reset</button>
         </div>
 
-        <div class="bet-info">Bet Amount: $10.00 per ball</div>
+        <div class="viz-toggles">
+          <button id="toggleTrailsBtn" class="toggle-btn">Trails</button>
+          <button id="toggleHeatmapBtn" class="toggle-btn">Heatmap</button>
+          <button id="clearHeatmapBtn" class="toggle-btn small">Clear heatmap</button>
+          <button id="replayBtn" class="toggle-btn small" disabled>Replay last ball</button>
+        </div>
+
+        <div class="audio-row">
+          <button id="muteBtn" class="toggle-btn small toggle-on">Mute</button>
+          <label class="field-inline">
+            Volume
+            <input id="volumeSlider" type="range" min="0" max="100" value="30" />
+          </label>
+          <button id="helpBtn" class="toggle-btn small" type="button" onclick="document.getElementById('shortcutsHelp').classList.toggle('hidden')">? Shortcuts</button>
+        </div>
       </div>
 
-      <div class="canvas-container">
-        <canvas id="gameCanvas"></canvas>
-        <canvas id="slotCanvas"></canvas>
+      <div class="game-area">
+        <div class="canvas-container">
+          <canvas id="heatmapCanvas"></canvas>
+          <canvas id="gameCanvas"></canvas>
+          <canvas id="glowCanvas"></canvas>
+          <canvas id="trailCanvas"></canvas>
+          <canvas id="replayCanvas"></canvas>
+          <canvas id="slotCanvas"></canvas>
+          <div id="replayBadge" class="replay-badge">REPLAY</div>
+        </div>
+        <aside class="sidebar" id="casinoSidebar">
+          <div class="stats-card" id="statsCard"></div>
+          <div class="drops-feed" id="dropsFeed"></div>
+        </aside>
+        <aside class="sidebar hidden" id="scienceSidebar">
+          <div class="stats-card">
+            <h3>Distribution</h3>
+            <div class="chart-wrapper">
+              <canvas id="distChart"></canvas>
+            </div>
+          </div>
+          <div class="stats-card">
+            <h3>Goodness of fit</h3>
+            <div id="scienceStats"></div>
+          </div>
+          <div class="stats-card">
+            <h3>Stress test</h3>
+            <p class="muted">10,000 simulated drops, no bet, no physics.</p>
+            <div class="stress-progress-bar">
+              <div id="stressProgress"></div>
+            </div>
+            <div id="stressLabel" class="mono muted"></div>
+            <div class="stress-buttons">
+              <button id="runStressBtn">Run 10,000 (fast)</button>
+              <button id="resetDistBtn" class="reset-stats-btn" style="margin-top:8px">Reset distribution</button>
+            </div>
+            <p id="stressNote" class="stress-note">Stress runs sample binomially with the seeded RNG; no money changes.</p>
+          </div>
+        </aside>
       </div>
     </div>
 
-    <script src="script.js"></script>
+    <div id="shortcutsHelp" class="shortcuts-help hidden">
+      <h3>Keyboard shortcuts</h3>
+      <ul>
+        <li><kbd>Space</kbd> Drop one ball</li>
+        <li><kbd>D</kbd> Drop ten balls</li>
+        <li><kbd>A</kbd> Toggle auto-bet</li>
+        <li><kbd>M</kbd> Switch Casino / Science</li>
+        <li><kbd>R</kbd> Reset stats</li>
+        <li><kbd>+</kbd> / <kbd>-</kbd> Double / halve bet</li>
+        <li><kbd>?</kbd> Toggle this help</li>
+        <li><kbd>Esc</kbd> Close help</li>
+      </ul>
+      <button onclick="document.getElementById('shortcutsHelp').classList.add('hidden')">Close</button>
+    </div>
+
+    <script type="module" src="src/main.js?v=9"></script>
   </body>
 </html>

@@ -6,6 +6,11 @@ This repository is a personal collection of simulation experiments — from phys
 -  **Turing Patterns** – reaction-diffusion systems and pattern emergence (Postponed)
 -  **Wave Simulations** – 1D/2D wave equations in motion (work in progress)
 -  **Kolmogorov Flow Simulation** – currently in progress
+-  **Plinko** – casino-style plinko (matter.js) with a Science mode that
+  overlays the empirical slot histogram on the theoretical binomial
+  distribution. Open `plinko/index.html` in a browser — no build step.
+  Adjustable rows (8–16), risk profile, auto-bet, trails, heatmap, and
+  a 10k-sample stress test.
 
 - More to come: fluid dynamics, cellular automata, particle systems...
 

@@ -41,3 +41,6 @@ Thumbs.db
 # Media files
 *.mp4
 *.gif
+
+# Plinko phase prompts (internal planning, not shipped)
+plinko/phases/
