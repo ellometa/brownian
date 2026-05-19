@@ -9,7 +9,11 @@ import { installBoardControls } from "./ui/boardControls.js";
 import { installAutoBet } from "./ui/autoBet.js";
 import { installStatsPanel } from "./ui/statsPanel.js";
 import { installDropsFeed } from "./ui/dropsFeed.js";
+import { installModeToggle } from "./ui/modeToggle.js";
+import { installSciencePanel } from "./ui/sciencePanel.js";
 import { installStats } from "./stats.js";
+import { installDistribution } from "./science/distribution.js";
+import { installChartBindings } from "./science/chart.js";
 import { updateMoneyDisplay, updateButtons } from "./ui/money.js";
 import { bus, setMoney } from "./state.js";
 import { load } from "./storage.js";
@@ -29,6 +33,10 @@ function init() {
   installAutoBet();
   installStatsPanel();
   installDropsFeed();
+  installDistribution();
+  installChartBindings();
+  installSciencePanel();
+  installModeToggle();
   startSlotsOverlay();
 
   updateMoneyDisplay();

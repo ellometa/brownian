@@ -366,3 +366,102 @@ button:disabled {
     opacity: 1;
   }
 }
+
+.title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.title-row h1 {
+  margin: 0;
+}
+
+.mode-switch {
+  display: flex;
+  gap: 4px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 4px;
+}
+
+.mode-btn {
+  padding: 6px 14px;
+  font-size: 0.85em;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.mode-btn:hover:not(:disabled) {
+  transform: none;
+  box-shadow: none;
+  color: #fff;
+}
+
+.mode-btn.active,
+.mode-btn.active:hover:not(:disabled) {
+  background: linear-gradient(135deg, #ffd700 0%, #ff9500 100%);
+  color: #1a1a2e;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.chart-wrapper {
+  height: 240px;
+  position: relative;
+}
+
+.muted {
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.8em;
+  margin: 0 0 8px 0;
+}
+
+.stress-progress-bar {
+  height: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+
+#stressProgress {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, #4ecdc4 0%, #ffd700 100%);
+  transition: width 0.1s linear;
+}
+
+.stress-buttons {
+  display: flex;
+  flex-direction: column;
+  margin-top: 8px;
+}
+
+#runStressBtn {
+  background: linear-gradient(135deg, #4ecdc4 0%, #2a9d8f 100%);
+  padding: 8px;
+  font-size: 0.9em;
+}
+
+.stress-note {
+  display: none;
+  font-size: 0.75em;
+  color: rgba(255, 215, 0, 0.8);
+  margin: 8px 0 0;
+  padding: 6px;
+  background: rgba(255, 215, 0, 0.08);
+  border-radius: 4px;
+  border-left: 3px solid #ffd700;
+}
+
+.stress-note.active {
+  display: block;
+}

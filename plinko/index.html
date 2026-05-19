@@ -6,10 +6,17 @@
     <title>Plinko Simulator</title>
     <link rel="stylesheet" href="style.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   </head>
   <body>
     <div class="container">
-      <h1>Plinko Simulator</h1>
+      <div class="title-row">
+        <h1>Plinko Simulator</h1>
+        <div class="mode-switch">
+          <button class="mode-btn active" data-mode="casino">Casino</button>
+          <button class="mode-btn" data-mode="science">Science</button>
+        </div>
+      </div>
 
       <div class="ui-panel">
         <div class="money-display" id="moneyDisplay">$1,000.00</div>
@@ -66,13 +73,38 @@
           <canvas id="gameCanvas"></canvas>
           <canvas id="slotCanvas"></canvas>
         </div>
-        <aside class="sidebar">
+        <aside class="sidebar" id="casinoSidebar">
           <div class="stats-card" id="statsCard"></div>
           <div class="drops-feed" id="dropsFeed"></div>
+        </aside>
+        <aside class="sidebar hidden" id="scienceSidebar">
+          <div class="stats-card">
+            <h3>Distribution</h3>
+            <div class="chart-wrapper">
+              <canvas id="distChart"></canvas>
+            </div>
+          </div>
+          <div class="stats-card">
+            <h3>Goodness of fit</h3>
+            <div id="scienceStats"></div>
+          </div>
+          <div class="stats-card">
+            <h3>Stress test</h3>
+            <p class="muted">10,000 simulated drops, no bet, no physics.</p>
+            <div class="stress-progress-bar">
+              <div id="stressProgress"></div>
+            </div>
+            <div id="stressLabel" class="mono muted"></div>
+            <div class="stress-buttons">
+              <button id="runStressBtn">Run 10,000 (fast)</button>
+              <button id="resetDistBtn" class="reset-stats-btn" style="margin-top:8px">Reset distribution</button>
+            </div>
+            <p id="stressNote" class="stress-note">Stress runs sample binomially with the seeded RNG; no money changes.</p>
+          </div>
         </aside>
       </div>
     </div>
 
-    <script type="module" src="src/main.js?v=3"></script>
+    <script type="module" src="src/main.js?v=4"></script>
   </body>
 </html>
