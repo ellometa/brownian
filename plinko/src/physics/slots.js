@@ -1,24 +1,27 @@
 import { CONFIG } from "../config.js";
 import { engine } from "./engine.js";
 import { state, bus, addMoney } from "../state.js";
+import { board, getMultipliers, getGeometry } from "../board.js";
 
 const { Bodies, World, Events } = Matter;
 
 export function createSlots() {
+  const { slotWidth, slotCount } = getGeometry();
+  const multipliers = getMultipliers();
   const centerX = CONFIG.CANVAS_WIDTH / 2;
-  const totalWidth = CONFIG.NUM_SLOTS * CONFIG.SLOT_WIDTH;
+  const totalWidth = slotCount * slotWidth;
   const startX = centerX - totalWidth / 2;
 
   state.slots = [];
 
-  for (let i = 0; i < CONFIG.NUM_SLOTS; i++) {
-    const x = startX + i * CONFIG.SLOT_WIDTH + CONFIG.SLOT_WIDTH / 2;
-    const multiplier = CONFIG.MULTIPLIERS[i];
+  for (let i = 0; i < slotCount; i++) {
+    const x = startX + i * slotWidth + slotWidth / 2;
+    const multiplier = multipliers[i];
 
     const slot = Bodies.rectangle(
       x,
       CONFIG.SLOT_Y,
-      CONFIG.SLOT_WIDTH - 2,
+      slotWidth - 2,
       CONFIG.SLOT_HEIGHT,
       {
         isStatic: true,
@@ -37,6 +40,13 @@ export function createSlots() {
   }
 
   World.add(engine.world, state.slots);
+}
+
+export function clearSlots() {
+  if (state.slots.length) {
+    World.remove(engine.world, state.slots);
+    state.slots = [];
+  }
 }
 
 function handlePayout(ballId, slot) {

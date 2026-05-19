@@ -1,14 +1,16 @@
 import { CONFIG } from "../config.js";
 import { engine } from "./engine.js";
 import { state, bus, addMoney } from "../state.js";
+import { board } from "../board.js";
 import { random } from "../rng.js";
 
 const { Bodies, World } = Matter;
 
 export function spawnBall() {
-  if (state.money < CONFIG.BET_AMOUNT) return null;
+  if (state.money < board.bet) return null;
 
-  addMoney(-CONFIG.BET_AMOUNT);
+  const bet = board.bet;
+  addMoney(-bet);
 
   const centerX = CONFIG.CANVAS_WIDTH / 2;
   const randomOffset = (random() - 0.5) * CONFIG.SPAWN_RANDOM_OFFSET * 2;
@@ -27,26 +29,21 @@ export function spawnBall() {
 
   state.activeBalls.set(ball.id, {
     body: ball,
-    bet: CONFIG.BET_AMOUNT,
+    bet,
     paidOut: false,
   });
 
   World.add(engine.world, ball);
 
-  bus.emit("ball:dropped", {
-    id: ball.id,
-    bet: CONFIG.BET_AMOUNT,
-    spawnX: x,
-  });
-
+  bus.emit("ball:dropped", { id: ball.id, bet, spawnX: x });
   return ball.id;
 }
 
-export function dropBalls(count) {
+export function dropBalls(count, intervalMs = 100) {
   const drop = (remaining) => {
     if (remaining <= 0) return;
     if (spawnBall() === null) return;
-    if (remaining > 1) setTimeout(() => drop(remaining - 1), 100);
+    if (remaining > 1) setTimeout(() => drop(remaining - 1), intervalMs);
   };
   drop(count);
 }
