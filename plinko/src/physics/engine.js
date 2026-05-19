@@ -20,7 +20,7 @@ export const render = Render.create({
     width: CONFIG.CANVAS_WIDTH,
     height: CONFIG.CANVAS_HEIGHT,
     wireframes: false,
-    background: "#1a1a2e",
+    background: "transparent",
     pixelRatio: window.devicePixelRatio || 1,
   },
 });

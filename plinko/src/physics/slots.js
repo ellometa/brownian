@@ -77,9 +77,10 @@ export function installCollisionHandler() {
   Events.on(engine, "collisionStart", (event) => {
     event.pairs.forEach((pair) => {
       const { bodyA, bodyB } = pair;
+
+      // Ball-slot: payout.
       let ball = null;
       let slot = null;
-
       if (bodyA.label.startsWith("slot_")) {
         slot = bodyA;
         ball = bodyB;
@@ -87,9 +88,25 @@ export function installCollisionHandler() {
         slot = bodyB;
         ball = bodyA;
       }
-
       if (ball && slot && state.activeBalls.has(ball.id)) {
         handlePayout(ball.id, slot);
+        return;
+      }
+
+      // Ball-peg: emit collision for viz.
+      let pegBall = null;
+      let peg = null;
+      if (bodyA.label === "peg" && !bodyB.isStatic) {
+        peg = bodyA;
+        pegBall = bodyB;
+      } else if (bodyB.label === "peg" && !bodyA.isStatic) {
+        peg = bodyB;
+        pegBall = bodyA;
+      }
+      if (peg && pegBall && state.activeBalls.has(pegBall.id)) {
+        const x = (pair.collision?.supports?.[0]?.x) ?? peg.position.x;
+        const y = (pair.collision?.supports?.[0]?.y) ?? peg.position.y;
+        bus.emit("physics:collision", { x, y, kind: "peg", ballId: pegBall.id });
       }
     });
   });
