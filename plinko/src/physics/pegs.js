@@ -25,11 +25,7 @@ export function createPegGrid() {
       const peg = Bodies.circle(x, y, CONFIG.PEG_RADIUS, {
         isStatic: true,
         label: "peg",
-        render: {
-          fillStyle: "#ffd700",
-          strokeStyle: "#ffed4e",
-          lineWidth: 2,
-        },
+        render: { visible: false },
       });
       pegBodies.push(peg);
     }

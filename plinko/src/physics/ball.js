@@ -62,7 +62,7 @@ export function spawnBall() {
     slop: 0.02,
     render: {
       fillStyle: "#f4f6ff",
-      strokeStyle: "#00e5a0",
+      strokeStyle: "rgba(0, 229, 160, 0.9)",
       lineWidth: 2,
     },
   });

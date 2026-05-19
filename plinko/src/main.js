@@ -17,6 +17,7 @@ import { installChartBindings } from "./science/chart.js";
 import { installTrails } from "./viz/trails.js";
 import { installHeatmap } from "./viz/heatmap.js";
 import { installReplay } from "./viz/replay.js";
+import { installGlow } from "./viz/glow.js";
 import { installAudio } from "./audio.js";
 import { installKeyboard } from "./ui/keyboard.js";
 import { installDeterminismToggle } from "./ui/determinismToggle.js";
@@ -45,6 +46,7 @@ function init() {
   installTrails();
   installHeatmap();
   installReplay();
+  installGlow();
   installAudio();
   installKeyboard();
   installDeterminismToggle();
