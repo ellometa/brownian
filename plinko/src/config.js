@@ -3,8 +3,8 @@ export const CONFIG = {
   CANVAS_HEIGHT: 600,
 
   GRAVITY_Y: 1.0,
-  PEG_RADIUS: 9,
-  BALL_RADIUS: 12,
+  PEG_RADIUS: 6,
+  BALL_RADIUS: 8,
 
   PEG_ROWS: 12,
   PEG_H_SPACING: 60,

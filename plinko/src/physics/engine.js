@@ -24,7 +24,7 @@ export const render = Render.create({
     height: CONFIG.CANVAS_HEIGHT,
     wireframes: false,
     background: "transparent",
-    pixelRatio: window.devicePixelRatio || 1,
+    pixelRatio: 1,
   },
 });
 
