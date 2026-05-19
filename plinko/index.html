@@ -73,6 +73,15 @@
           <button id="clearHeatmapBtn" class="toggle-btn small">Clear heatmap</button>
           <button id="replayBtn" class="toggle-btn small" disabled>Replay last ball</button>
         </div>
+
+        <div class="audio-row">
+          <button id="muteBtn" class="toggle-btn small toggle-on">Mute</button>
+          <label class="field-inline">
+            Volume
+            <input id="volumeSlider" type="range" min="0" max="100" value="30" />
+          </label>
+          <button id="helpBtn" class="toggle-btn small" type="button" onclick="document.getElementById('shortcutsHelp').classList.toggle('hidden')">? Shortcuts</button>
+        </div>
       </div>
 
       <div class="game-area">
@@ -116,6 +125,21 @@
       </div>
     </div>
 
-    <script type="module" src="src/main.js?v=5"></script>
+    <div id="shortcutsHelp" class="shortcuts-help hidden">
+      <h3>Keyboard shortcuts</h3>
+      <ul>
+        <li><kbd>Space</kbd> Drop one ball</li>
+        <li><kbd>D</kbd> Drop ten balls</li>
+        <li><kbd>A</kbd> Toggle auto-bet</li>
+        <li><kbd>M</kbd> Switch Casino / Science</li>
+        <li><kbd>R</kbd> Reset stats</li>
+        <li><kbd>+</kbd> / <kbd>-</kbd> Double / halve bet</li>
+        <li><kbd>?</kbd> Toggle this help</li>
+        <li><kbd>Esc</kbd> Close help</li>
+      </ul>
+      <button onclick="document.getElementById('shortcutsHelp').classList.add('hidden')">Close</button>
+    </div>
+
+    <script type="module" src="src/main.js?v=6"></script>
   </body>
 </html>
