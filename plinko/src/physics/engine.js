@@ -1,6 +1,6 @@
 import { CONFIG } from "../config.js";
 
-const { Engine, Render, World, Bodies } = Matter;
+const { Engine, Render, Runner, World, Bodies } = Matter;
 
 export const engine = Engine.create();
 engine.world.gravity.y = CONFIG.GRAVITY_Y;
@@ -54,7 +54,9 @@ const walls = [
 
 World.add(engine.world, walls);
 
+const runner = Runner.create();
+
 export function startEngine() {
   Render.run(render);
-  Engine.run(engine);
+  Runner.run(runner, engine);
 }
